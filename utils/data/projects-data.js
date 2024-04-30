@@ -14,16 +14,6 @@ export const projectsData = [
         demo: 'https://busboy.vercel.app/',
         image: crefin,
     },
-    {
-        id: 2,
-        name: 'BUSBOY : Bus Booking Site',
-        description: "Busboy is a Bus Booking Site using React and Tailwind for frontend. Busboy is a webapp where users can search for buses and quickly book their seats. On the backend, Node.js and Express.js provide the backbone, ensuring the system's efficiency, while MongoDB manages data effectively. To top it off, Stripe payment integration adds a layer of convenience and security to financial transactions.",
-        tools: ['React', 'Tailwind', 'Redux', 'MongoDB', 'Express', 'Node.JS', 'Stripe'],
-        role: 'Lead Developer',
-        code: '',
-        demo: 'https://busboy.vercel.app/',
-        image: crefin,
-    }
 ];
 
 
