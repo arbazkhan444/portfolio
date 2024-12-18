@@ -1,5 +1,7 @@
 // @flow strict
 import Link from "next/link";
+import { FaAtlassian } from "react-icons/fa";
+import { MdCodeOff } from "react-icons/md";
 
 
 function Navbar() {
@@ -7,11 +9,14 @@ function Navbar() {
     <nav className="bg-transparent">
       <div className="flex items-center justify-between py-5">
         <div className="flex flex-shrink-0 items-center">
+          <FaAtlassian className="w-7 h-7 fill-[#16f2b3]"/>
           <Link
             href="/"
-            className=" text-[#16f2b3] text-3xl font-bold">
-            Arbaz
+            className="text-[#16f2b3] text-3xl font-bold">
+            rbaz
           </Link>
+          {/* <MdCodeOff className="w-7 h-7 fill-[#16f2b3] rotate-90"/> */}
+            {/* <img width="48" height="48" src="https://img.icons8.com/color/48/000000/source-code.png" alt="source-code"/> */}
         </div>
 
         <ul className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100" id="navbar-default">
