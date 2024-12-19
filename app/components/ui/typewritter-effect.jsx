@@ -1,60 +1,44 @@
 "use client";
 
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { cn } from "@/utils/cn";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 export const TypewriterEffect = ({
   words,
   className,
   cursorClassName,
+  typingSpeed = 100,
+  pauseDuration = 1500,
+  loop = true
 }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentText, setCurrentText] = useState("");
+  const [currentText, setCurrentText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    setCurrentWordIndex(0);
-    setCurrentText("");
-    setIsTyping(true);
-    setIsPaused(false);
-  }, [words]);
+    const currentWord = words[currentWordIndex].text;
 
-  useEffect(() => {
-    let timeout;
-    
-    if (isTyping && !isPaused) {
-      if (currentText.length < words[currentWordIndex].text.length) {
-        timeout = setTimeout(() => {
-          setCurrentText(words[currentWordIndex].text.slice(0, currentText.length + 1));
-        }, 100);
+    if (isTyping) {
+      if (currentText.length < currentWord.length) {
+        const timeout = setTimeout(() => {
+          setCurrentText(currentWord.slice(0, currentText.length + 1));
+        }, typingSpeed);
+
+        return () => clearTimeout(timeout);
       } else {
-        setIsPaused(true);
-        timeout = setTimeout(() => {
-          setIsPaused(false);
-          setIsTyping(false);
-        }, 1500);
+        setIsTyping(false);
       }
-    } else if (!isTyping && !isPaused) {
-      if (currentText.length > 0) {
-        timeout = setTimeout(() => {
-          setCurrentText(currentText.slice(0, -1));
-        }, 50);
-      } else {
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+    } else if (currentWordIndex < words.length - 1 || loop) {
+      const timeout = setTimeout(() => {
+        setCurrentText('');
+        setCurrentWordIndex((currentWordIndex + 1) % words.length);
         setIsTyping(true);
-        setIsPaused(false);
-      }
+      }, pauseDuration);
+
+      return () => clearTimeout(timeout);
     }
-
-    return () => clearTimeout(timeout);
-  }, [currentText, isTyping, currentWordIndex, isPaused, words]);
-
-  // Debug log to check word cycling
-  useEffect(() => {
-    console.log('Current word:', words[currentWordIndex].text);
-  }, [currentWordIndex, words]);
+  }, [currentText, typingSpeed, words, currentWordIndex, isTyping, loop, pauseDuration]);
 
   return (
     <div className={cn("flex flex-col space-y-2", className)}>
@@ -71,9 +55,13 @@ export const TypewriterEffect = ({
             repeatType: "reverse",
           }}
           className={cn(
-            "inline-block ml-1 w-[4px] h-4 md:h-6 lg:h-8 bg-blue-500",
+            "inline-block ml-1 w-[4px] h-4 md:h-6 lg:h-8",
+            words[currentWordIndex].className, // Apply the same className as the text
             cursorClassName
           )}
+          style={{
+            backgroundColor: 'currentColor' // This will make the background color match the text color
+          }}
         />
       </div>
     </div>
