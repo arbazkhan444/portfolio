@@ -1,27 +1,24 @@
-// @flow strict
-
+"use client"
+import { useEffect, useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
-import { TypewriterEffect } from '../../ui/typewritter-effect';
-
+import { TypewriterEffect } from "../../ui/typewritter-effect";
 
 function AboutSection() {
-  
-  // Commented out typewriter related code
-  // const typewriterWords = [
-  //   {
-  //     text: "Software Developer",
-  //     className: "text-[#16f2b3]"
-  //   },
-  //   {
-  //     text: "Full Stack Developer",
-  //     className: "text-blue-500"
-  //   },
-  //   {
-  //     text: "Problem Solver",
-  //     className: "text-green-500"
-  //   }
-  // ];
+  const typewriterWords = [
+    {
+      text: "Software Developer",
+      className: "text-[#16f2b3] text-3xl",
+    },
+    {
+      text: "Full Stack Developer",
+      className: "text-blue-500 text-3xl",
+    },
+    {
+      text: "Problem Solver",
+      className: "text-green-500 text-3xl",
+    },
+  ];
 
   return (
     <div id="about" className="my-12 lg:my-16 relative">
@@ -37,12 +34,11 @@ function AboutSection() {
             Who I am?
           </p>
           <div className="text-gray-200 text-sm lg:text-lg">
-            {/* Commented out TypewriterEffect component */}
-            {/* <TypewriterEffect 
+            <TypewriterEffect
               words={typewriterWords}
               className="mb-4"
               cursorClassName="bg-[#16f2b3]"
-            /> */}
+            />
             <p>{personalData.description}</p>
           </div>
         </div>
@@ -58,6 +54,6 @@ function AboutSection() {
       </div>
     </div>
   );
-};
+}
 
 export default AboutSection;
