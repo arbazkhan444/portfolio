@@ -7,6 +7,7 @@ import { FaFacebook, FaStackOverflow } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 import { IoLogoGithub, IoMdCall } from "react-icons/io";
 import { MdAlternateEmail } from "react-icons/md";
+
 import ContactForm from './contact-form';
 
 function ContactSection() {

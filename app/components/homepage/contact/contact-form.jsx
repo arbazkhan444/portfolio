@@ -27,10 +27,11 @@ function ContactForm() {
   };
 
   const handleSendMail = async (e) => {
-    if (!captcha) {
+    // Only check captcha if reCAPTCHA is enabled (site key is available)
+    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !captcha) {
       toast.error('Please complete the captcha!');
       return;
-    } else {
+    } else if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && captcha) {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/google`, {
         token: captcha
       });
@@ -127,10 +128,12 @@ function ContactForm() {
               value={input.message}
             />
           </div>
-          <ReCAPTCHA
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            onChange={(code) => setCaptcha(code)}
-          />
+          {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              onChange={(code) => setCaptcha(code)}
+            />
+          )}
           <div className="flex flex-col items-center gap-2">
             {error.required &&
               <p className="text-sm text-red-400">

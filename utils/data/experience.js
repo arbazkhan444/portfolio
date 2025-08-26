@@ -2,8 +2,8 @@ export const experiences = [
   {
     id: 1,
     title: "Full Stack Developer",
-    company: "Applitech Solutions, Bangalore",
-    duration: "(Jun 2021 - Dec 2024)"
+    company: "Weframe Tech, Bangalore",
+    duration: "(Oct 2023 - Present)"
   },
   {
     id: 2,
